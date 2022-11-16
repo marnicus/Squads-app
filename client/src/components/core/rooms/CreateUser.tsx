@@ -5,37 +5,16 @@ import {
   Typography,
   Grid,
   TextField,
-  Input,
   MenuItem,
-  IconButton,
 } from "@mui/material";
 import React from "react";
 import { modalBox } from "../../constants";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { SquadMember } from "../../interfaces";
-import { format, compareAsc } from "date-fns";
-import db from "../../../api/firebaseAPI";
-import {
-  doc,
-  onSnapshot,
-  updateDoc,
-  setDoc,
-  deleteDoc,
-  collection,
-  serverTimestamp,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-} from "firebase/firestore";
-import { v4 as uuidv4 } from "uuid";
 
-const ariaLabel = { "aria-label": "description" };
 
 const CreateUser = () => {
   const [fullName, setFullName] = React.useState<string>("");
-  const [userName, setUserName] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
   const [selectedFile, setSelectedFile] = React.useState<File>();
   const [imgPath, setImgPath] = React.useState<string>("");
   const [open, setOpen] = React.useState(false);
@@ -50,20 +29,7 @@ const CreateUser = () => {
   const saveNewMember = async () => {
     console.log("Called SaveNewMember");
 
-    const newSquadMember: SquadMember = {
-      id: uuidv4(),
-      fullName: fullName!,
-      username: userName!,
-      profilePic: selectedFile?.name!,
-      createdAt: format(new Date(), "T"),
-    };
-    try {
-      const collectionRef = collection(db, "members");
-      const memberRef = doc(collectionRef, newSquadMember.id);
-      setDoc(memberRef, newSquadMember);
-    } catch (error) {
-      console.log(error);
-    }
+
     // addDoc(collection(db, "members"), {
     //   fullName: newSquadMember.fullName,
     //   username: newSquadMember.username,
@@ -106,11 +72,12 @@ const CreateUser = () => {
             <Grid item xs={12}>
               <TextField
                 id="outlined-basic"
-                label="Username"
+                label="Email"
                 variant="outlined"
                 fullWidth
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={email}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
