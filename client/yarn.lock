@@ -6369,9 +6369,9 @@ jest-mock@^27.5.1:
     "@types/node" "*"
 
 jest-pnp-resolver@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.2.tgz#b704ac0ae028a89108a4d040b3f919dfddc8e33c"
-  integrity sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.3.tgz#930b1546164d4ad5937d5540e711d4d38d4cad2e"
+  integrity sha512-+3NpwQEnRoIBtx4fyhblQDPgJI0H1IEIkX7ShLUjPGA7TtUTvI1oiKi3SR4oBR0hQhQR80l4WAe5RrXBwWMA8w==
 
 jest-regex-util@^27.5.1:
   version "27.5.1"
@@ -7036,9 +7036,9 @@ min-indent@^1.0.0:
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
 mini-css-extract-plugin@^2.4.5:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.6.1.tgz#9a1251d15f2035c342d99a468ab9da7a0451b71e"
-  integrity sha512-wd+SD57/K6DiV7jIR34P+s3uckTRuQvx0tKPcvjFlrEylk6P4mQ2KSWk1hblj1Kxaqok7LogKOieygXqBczNlg==
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.7.0.tgz#d7d9ba0c5b596d155e36e2b174082fc7f010dd64"
+  integrity sha512-auqtVo8KhTScMsba7MbijqZTfibbXiBNlPAQbsVt7enQfcDYLdgG57eGxMqwVU3mfeWANY4F1wUg+rMF+ycZgw==
   dependencies:
     schema-utils "^4.0.0"
 
@@ -8543,16 +8543,16 @@ regexpp@^3.2.0:
   integrity sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==
 
 regexpu-core@^5.1.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-5.2.1.tgz#a69c26f324c1e962e9ffd0b88b055caba8089139"
-  integrity sha512-HrnlNtpvqP1Xkb28tMhBUO2EbyUHdQlsnlAhzWcwHy8WJR53UWr7/MAvqrsQKMbV4qdpv03oTMG8iIhfsPFktQ==
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/regexpu-core/-/regexpu-core-5.2.2.tgz#3e4e5d12103b64748711c3aad69934d7718e75fc"
+  integrity sha512-T0+1Zp2wjF/juXMrMxHxidqGYn8U4R+zleSJhX9tQ1PUsS8a9UtYfbsF9LdiVgNX3kiX8RNaKM42nfSgvFJjmw==
   dependencies:
     regenerate "^1.4.2"
     regenerate-unicode-properties "^10.1.0"
     regjsgen "^0.7.1"
     regjsparser "^0.9.1"
     unicode-match-property-ecmascript "^2.0.0"
-    unicode-match-property-value-ecmascript "^2.0.0"
+    unicode-match-property-value-ecmascript "^2.1.0"
 
 regjsgen@^0.7.1:
   version "0.7.1"
@@ -9536,9 +9536,9 @@ typedarray-to-buffer@^3.1.5:
     is-typedarray "^1.0.0"
 
 typescript@^4.4.2:
-  version "4.8.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
-  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
+  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
@@ -9563,10 +9563,10 @@ unicode-match-property-ecmascript@^2.0.0:
     unicode-canonical-property-names-ecmascript "^2.0.0"
     unicode-property-aliases-ecmascript "^2.0.0"
 
-unicode-match-property-value-ecmascript@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-2.0.0.tgz#1a01aa57247c14c568b89775a54938788189a714"
-  integrity sha512-7Yhkc0Ye+t4PNYzOGKedDhXbYIBe1XEQYQxOPyhcXNMJ0WCABqqj6ckydd6pWRZTHV4GuCPKdBAUiMc60tsKVw==
+unicode-match-property-value-ecmascript@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/unicode-match-property-value-ecmascript/-/unicode-match-property-value-ecmascript-2.1.0.tgz#cb5fffdcd16a05124f5a4b0bf7c3770208acbbe0"
+  integrity sha512-qxkjQt6qjg/mYscYMC0XKRn3Rh0wFPlfxB0xkt9CfyTvpX1Ra0+rAmdX2QyAobptSEvuy4RtpPRui6XkV+8wjA==
 
 unicode-property-aliases-ecmascript@^2.0.0:
   version "2.1.0"

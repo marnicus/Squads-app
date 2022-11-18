@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const MemberSchema = new mongoose.Schema({
-  id: {
+  firstName: {
     type: String,
     required: true,
   },
-  fullName: {
+  lastName: {
     type: String,
     required: true,
   },

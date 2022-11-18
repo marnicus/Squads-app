@@ -5,8 +5,9 @@ const router = express.Router();
 
 router.get("/test", (req, res) => res.send("Squads route testing!"));
 
-router.get("/", (req, res) => {
-  Squad.find()
+router.get("/:memberId", (req, res) => {
+  const { memberId } = req.params;
+  Squad.find({ "members._id": memberId })
     .then((squads) => res.json(squads))
     .catch((err) =>
       res.status(404).json({ nomembersfound: "No Squads found" })

@@ -1,5 +1,5 @@
-const { joinPaths } = require("@remix-run/router");
 const express = require("express");
+const bcrypt = require('bcryptjs');
 const Member = require("../config/models/Member");
 const Join = require('../config/models/Join');
 const router = express.Router();
@@ -21,17 +21,30 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/join', (req, res) => {
-    const { fullName, email, password, profilePic } = req.body;
-    bcrypt.hash(password, saltRounds, function (err, hash) {
+
+    const { id, firstName, lastName, email, password, profilePic } = req.body;
+
+    bcrypt.hash(password, 5, function (err, hash) {
+        if (err) {
+            console.log(err);
+            return res.status(400).json({ error: "Something went wrong try again" });
+        }
         // Store hash in your password DB.
         const newMember = {
-            fullName,
+            id,
+            firstName,
+            lastName,
             email,
             password: hash,
             profilePic,
         }
-        Member.create(newMember).then((member) => res.json({ result: true }))
-            .catch((err) => res.status(400).json({ error: "Unable to add this book", result: false }));
+        Member.create(newMember).then((member) => res.json({ result: true, member }))
+            .catch((err) => {
+                console.log(err);
+                res.status(400).json({ error: "Unable to add member", result: false });
+            });
     });
 
 })
+
+module.exports = router;

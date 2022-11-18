@@ -22,6 +22,9 @@ export const theme = createTheme({
         h6: {
             color: 'white'
         },
+        body2: {
+            color: 'white'
+        }
     },
     palette: {
         mode: 'dark',

@@ -5,7 +5,9 @@ import SidePanel from './core/SidePanel';
 import ChatRoom from './core/rooms/ChatRoom';
 import React from "react";
 
+
 const MainContent = () => {
+
     return <React.Fragment>
         <MyAppBar />
         <Grid container spacing={0}>

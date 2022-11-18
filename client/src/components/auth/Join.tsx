@@ -1,38 +1,54 @@
-import { Copyright } from "@material-ui/icons";
+
 import {
   Container,
   Box,
-  Avatar,
   Typography,
   Grid,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Button,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createMember } from "../../api/dbAPI";
-import { SquadMember } from "../interfaces";
-import { v4 as uuidv4 } from "uuid";
-import { redirect } from "react-router-dom";
+import { AuthState, SquadMember } from "../interfaces";
+// import { redirect } from "react-router-dom";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { changeAuth, changeLoading } from "../../redux/authSlice";
 
 const Join = () => {
+  const { loading } = useSelector((state: RootState) => state.authReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = React.useState<File>();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    dispatch(changeLoading(true));
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    const data = {
-      id: uuidv4(),
-      fullName: `${formData.get("firstName")} ${formData.get("lastName")}`,
-      profilePic: formData.get("profilePic"),
+    const newMember = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      profilePic: URL.createObjectURL(selectedFile!),
       email: formData.get("email"),
       password: formData.get("password"),
     } as SquadMember;
 
-    const squadMember = await createMember(data);
-    if (squadMember) redirect("/");
+    const response = await createMember(newMember);
+    console.log("CreateMember function " + console.log(JSON.stringify(response.result)));
+    if (response.result) {
+      const payload: AuthState = {
+        isAuthenticated: true,
+        loading: false,
+        squadMember: response.member!
+      }
+      dispatch(changeAuth(payload));
+      navigate("/");
+    } else {
+      dispatch(changeLoading(false));
+    }
+
   };
 
   return (
@@ -46,11 +62,9 @@ const Join = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+
           <Typography component="h1" variant="h5">
-            Sign up
+            Join
           </Typography>
           <Box
             component="form"
@@ -59,6 +73,34 @@ const Join = () => {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
+              <Grid item>
+                {selectedFile ? (
+                  <div>
+                    <img src={URL.createObjectURL(selectedFile!)} height="100" width="100" alt={selectedFile?.name} />
+                    <br />
+                    <Typography variant="h6">{selectedFile?.name}</Typography>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+                <Button
+                  variant="contained"
+                  component="label"
+                  startIcon={<AddPhotoAlternateIcon />}
+                >
+                  Upload Profile Picture
+                  <input
+                    hidden
+                    accept="image/*"
+                    type="file"
+                    onChange={(e) => {
+                      if (!e.target.files) return;
+                      console.log(e.target.files[0]);
+                      return setSelectedFile(e.target.files[0]);
+                    }}
+                  />
+                </Button>
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
@@ -101,35 +143,29 @@ const Join = () => {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+
             </Grid>
-            <Button
+            {loading ? <Typography variant="h5">Saving member information..</Typography> : <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
-            </Button>
+            </Button>}
+
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="#" >
-                  <Typography variant="body2">Already have an account? Sign in</Typography>
+                <Link to="/join" >
+                  <Typography variant="body2">Already have an account? Join</Typography>
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+
       </Container>
-      s
+
     </React.Fragment>
   );
 };

@@ -1,17 +1,28 @@
 import { Modal, Box, Grid, TextField, MenuItem } from "@mui/material";
-import React from "react";
+import { useState, Fragment } from "react";
 import { modalBox } from '../../constants';
+import { getMembers } from '../../../api/dbAPI';
+import { AllMembers } from "../../interfaces";
 
 
 const CreateRoom = () => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [members, setMembers] = useState<[]>([])
     const handleOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
-    return <React.Fragment>
+    useState(() => {
+
+    })
+
+    const queryAllMembers = async () => {
+        const getAllMembers: AllMembers[] = await getMembers();
+        setMembers(getAllMembers);
+    }
+    return <Fragment>
         <MenuItem onClick={handleOpen}>Create an room</MenuItem >
         <Modal
             open={open}
@@ -30,7 +41,7 @@ const CreateRoom = () => {
                 </Grid>
             </Box>
         </Modal>
-    </React.Fragment>
+    </Fragment>
 
 }
 

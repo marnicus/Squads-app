@@ -7,7 +7,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./AppTheme";
 import CssBaseline from "@mui/material/CssBaseline";
 import { StyledEngineProvider } from "@mui/material/styles";
-import store from "./redux/store";
+import {store} from "./redux/store";
 import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(

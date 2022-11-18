@@ -1,10 +1,16 @@
+export type AuthState = {
+  squadMember: SquadMember | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+}
 export interface SquadMember {
-  id: string;
-  fullName: string;
+  _id?: string;
+  firstName: string;
+  lastName: string;
   email: string;
   profilePic: string;
   password?: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface Squad {
@@ -16,3 +22,14 @@ export type Login = {
   email: string;
   password: string;
 };
+
+export type MemberResult = {
+  result: boolean;
+  member?: SquadMember
+}
+
+export type AllMembers = {
+  members: SquadMember[]
+}
+
+

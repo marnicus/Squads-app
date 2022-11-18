@@ -1,43 +1,48 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
+import { loginMember } from "../../api/dbAPI";
+import { AuthState, Login } from "../interfaces";
+import { changeAuth, changeLoading } from "../../redux/authSlice";
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
-const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+const LoginMember = () => {
+  const { loading } = useSelector((state: RootState) => state.authReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const formData = {
+      email: data.get('email'),
+      password: data.get('password')
+    } as Login;
+
+    const response = await loginMember(formData!);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+    if (response.result) {
+      const payload: AuthState = {
+        isAuthenticated: true,
+        loading: false,
+        squadMember: response.member!
+      }
+      dispatch(changeAuth(payload));
+      navigate("/");
+    } else {
+      dispatch(changeLoading(false));
+    }
   };
 
   return (
@@ -52,9 +57,7 @@ const Login = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -84,36 +87,34 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
-            <Button
+            /> */}
+            {loading ? <Typography variant="body2">Looking for you..</Typography> : <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Button>
+            </Button>}
+
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link to="/join">
+                  <Typography variant="body2">{"Don't have an account? Sign Up"}</Typography>
+
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+
       </Container>
     </React.Fragment>
   );
 };
 
-export default Login;
+export default LoginMember;
