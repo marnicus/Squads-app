@@ -9,15 +9,20 @@ router.get("/:memberId", (req, res) => {
   const { memberId } = req.params;
   Squad.find({ "members._id": memberId })
     .then((squads) => res.json(squads))
-    .catch((err) =>
-      res.status(404).json({ nomembersfound: "No Squads found" })
-    );
+    .catch((err) => res.status(404).json({ error: "No Squads found" }));
 });
 
 router.post("/", (req, res) => {
-  Squad.create(req.body)
-    .then((sqaud) => res.json({ msg: "Squad successfully created" }))
-    .catch((err) => res.status(400).json({ error: "Unable to create squad" }));
+  const { id } = req.body;
+  Squad.findById(id).then((squad) => {
+    if (!squad) {
+      Squad.create(req.body)
+        .then((squad) => res.json({ msg: "Squad successfully created", squad }))
+        .catch((err) =>
+          res.status(400).json({ error: "Unable to create squad" })
+        );
+    }
+  });
 });
 
 module.exports = router;

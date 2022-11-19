@@ -2,7 +2,7 @@ export type AuthState = {
   squadMember: SquadMember | null;
   isAuthenticated: boolean;
   loading: boolean;
-}
+};
 export interface SquadMember {
   _id?: string;
   firstName: string;
@@ -13,7 +13,7 @@ export interface SquadMember {
   createdAt?: string;
 }
 
-export interface Squad {
+export interface Squads {
   name: string;
   users: [SquadMember];
 }
@@ -25,11 +25,9 @@ export type Login = {
 
 export type MemberResult = {
   result: boolean;
-  member?: SquadMember
+  member?: SquadMember;
+};
+
+export interface AllMembers {
+  members: SquadMember[];
 }
-
-export type AllMembers = {
-  members: SquadMember[]
-}
-
-
