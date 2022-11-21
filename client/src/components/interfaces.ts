@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type AuthState = {
   squadMember: SquadMember | null;
   isAuthenticated: boolean;
@@ -15,7 +17,12 @@ export interface SquadMember {
 
 export interface Squads {
   name: string;
-  users: [SquadMember];
+  members: SquadMember[];
+}
+
+export interface NewSquad {
+  name: string;
+  members: string[];
 }
 
 export type Login = {
@@ -28,6 +35,12 @@ export type MemberResult = {
   member?: SquadMember;
 };
 
-export interface AllMembers {
-  members: SquadMember[];
+export type Message = {
+  _id: string,
+  type: string;
+  member: SquadMember;
+  message?: string;
+  emoji?: string;
+  imageURL?: string;
+  createdAt: string;
 }

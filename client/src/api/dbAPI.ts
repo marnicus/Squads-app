@@ -2,7 +2,8 @@ import {
   Login,
   MemberResult,
   SquadMember,
-  AllMembers,
+  NewSquad,
+  Squads,
 } from "../components/interfaces";
 import client from "./client";
 
@@ -17,6 +18,18 @@ export const createMember = async (data: SquadMember) => {
   }
   return { result: false, member: null };
 };
+
+export const createNewSquad = async (data: NewSquad) => {
+  if (data !== undefined) {
+    const getResults = await client.post('/api/squads', data);
+    console.log(getResults);
+    if (getResults.status === 200) {
+      return getResults.data;
+    }
+
+  }
+  return { squad: null }
+}
 
 export const loginMember = async (data: Login) => {
   if (data !== undefined) {
@@ -42,6 +55,6 @@ export const getMemberSquads = async (memberId: string) => {
 export const getMembers = async () => {
   const getData = await client.get("/api/member/allMembers");
 
-  const membersList: AllMembers = getData.data;
+  const membersList: SquadMember[] = getData.data;
   return membersList;
 };

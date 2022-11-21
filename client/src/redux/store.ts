@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import sidePanelReducer from './sidePanelSlice';
 import sideMenuReducer from './sideMenuSlice';
 import squadRoomReducer from './squadRoomSlice';
+import squadsSlice from './squadsSlice';
 import authReducer from './authSlice';
 import { logger } from './middleware';
 
@@ -10,6 +11,7 @@ export const store = configureStore({
     reducer: {
         authReducer,
         squadRoomReducer,
+        squadsSlice,
         sideMenuReducer,
         sidePanelReducer
     }

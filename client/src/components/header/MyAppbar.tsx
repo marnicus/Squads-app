@@ -9,11 +9,14 @@ import Avatar from "@mui/material/Avatar";
 import { deepPurple } from "@mui/material/colors";
 import CreateModal from "./CreateMenu";
 import Button from "@mui/material/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 // import IconButton from '@mui/material/IconButton';
 // import MenuIcon from '@mui/icons-material/Menu';
 
 const MyAppBar = () => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.authReducer);
   return (
     <Box id="appBarBox" sx={{ flexGrow: 1 }}>
       <AppBar
@@ -31,8 +34,8 @@ const MyAppBar = () => {
           <Box>
             <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
           </Box>
-
           <CreateModal />
+
         </Toolbar>
       </AppBar>
     </Box>

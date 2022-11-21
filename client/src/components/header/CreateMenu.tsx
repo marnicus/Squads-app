@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import React from "react";
 import AddIcon from '@mui/icons-material/Add';
 import { Menu } from "@mui/material";
-import CreateRoom from "../core/rooms/CreateRoom";
+import CreateRoom from "../core/rooms/CreateSquad";
 import CreateUser from "../core/rooms/CreateUser";
 
 
