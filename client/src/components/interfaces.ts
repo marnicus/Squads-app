@@ -36,11 +36,11 @@ export type MemberResult = {
 };
 
 export type Message = {
-  _id: string,
+  _id: string;
   type: string;
   member: SquadMember;
-  message?: string;
+  text?: string;
   emoji?: string;
   imageURL?: string;
   createdAt: string;
-}
+};

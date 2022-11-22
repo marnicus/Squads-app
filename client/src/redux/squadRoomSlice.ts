@@ -24,4 +24,6 @@ export const squadRoomSlice = createSlice({
     }
 });
 
+export const { loadSquad, postMessage } = squadRoomSlice.actions;
+
 export default squadRoomSlice.reducer;
