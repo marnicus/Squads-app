@@ -4,6 +4,8 @@ import {
   SquadMember,
   NewSquad,
   Squads,
+  Message,
+  Post,
 } from "../components/interfaces";
 import client from "./client";
 
@@ -58,3 +60,12 @@ export const getMembers = async () => {
   const membersList: SquadMember[] = getData.data;
   return membersList;
 };
+
+export const sendMessage = async (message: Post) => {
+  await client.post('/api/squads/post', message);
+}
+export const getChatData = async (squadId: string) => {
+  const getResults = await client.get(`/api/squads/squadmessages/${squadId}`);
+  const getData = getResults.data;
+  return getData.results;
+}

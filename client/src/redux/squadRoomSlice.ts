@@ -4,12 +4,16 @@ import { Message } from '../components/interfaces';
 export const squadRoomSlice = createSlice({
     name: 'squadRoom',
     initialState: {
-        squadID: '',
+        squadId: '',
         squadName: '',
         messages: [] as Message[],
         loading: false
     },
     reducers: {
+        selectedSquad: (state, action) => {
+           
+            state.squadId = action.payload;
+        },
         loadSquad: (state, action) => {
             const { squadName, messages } = action.payload;
             state.loading = true;
@@ -24,6 +28,6 @@ export const squadRoomSlice = createSlice({
     }
 });
 
-export const { loadSquad, postMessage } = squadRoomSlice.actions;
+export const { loadSquad, postMessage, selectedSquad } = squadRoomSlice.actions;
 
 export default squadRoomSlice.reducer;

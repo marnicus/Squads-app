@@ -16,6 +16,7 @@ export interface SquadMember {
 }
 
 export interface Squads {
+  _id: string;
   name: string;
   members: SquadMember[];
 }
@@ -35,12 +36,29 @@ export type MemberResult = {
   member?: SquadMember;
 };
 
-export type Message = {
-  _id: string;
+export type SquadChat = {
+  _id: string,
+  squadId: string;
+  messages: Message[]
+}
+
+export type Post = {
+  _id?: string;
+  squadId: string;
   type: string;
   member: SquadMember;
   text?: string;
   emoji?: string;
   imageURL?: string;
-  createdAt: string;
+  createdAt?: string;
+}
+
+export type Message = {
+  _id?: string;
+  type: string;
+  member: SquadMember;
+  text?: string;
+  emoji?: string;
+  imageURL?: string;
+  createdAt?: string;
 };

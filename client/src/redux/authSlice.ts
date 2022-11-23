@@ -16,6 +16,7 @@ export const authSlice = createSlice({
       const { isAuthenticated, loading, squadMember }: AuthState = action.payload;
       state.isAuthenticated = isAuthenticated;
       state.loading = loading;
+      delete squadMember?.password;
       state.squadMember = squadMember;
     },
   },

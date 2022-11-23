@@ -3,12 +3,10 @@ import { Message } from "../../../interfaces";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 
-const Message = (message: Message) => {
+const MessageCard = ({ message }: { message: Message }) => {
   if (message.type === "image") {
   }
 
-  if (message.type === "emoji") {
-  }
 
   return (
     <Fragment>
@@ -19,4 +17,4 @@ const Message = (message: Message) => {
   );
 };
 
-export default Message;
+export default MessageCard;

@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const express = require("express");
+const Chat = require("../config/models/Chat");
 const Member = require("../config/models/Member");
 const Squad = require("../config/models/Squads");
 const ObjectId = require('mongodb').ObjectId;
@@ -24,9 +25,7 @@ router.post("/", (req, res) => {
       // ⇒ do not attempt to process array
 
       const getObjectIds = members.map((member) => ObjectId(member));
-      console.log(`Looking for members by objectId ${JSON.stringify(getObjectIds)}`);
       const getMemberData = await Member.find({ _id: { $in: getObjectIds } });
-      console.log('Looking for members')
       console.log(getMemberData);
       const newSquad = {
         name,
@@ -39,11 +38,63 @@ router.post("/", (req, res) => {
         );
     }
 
-
-
-
-
   });
 });
+
+router.get('/squadmessages/:squadId', (req, res) => {
+  const { squadId } = req.params;
+  console.log(squadId);
+  Chat.findOne({ squadId: squadId }).then((data) => {
+    res.json({ results: data })
+  }).catch((err) => res.status(500).json({ error: "Not messages found", results: [] }))
+})
+
+router.post('/post', (req, res) => {
+  const {
+    squadId,
+    _id,
+    type,
+    text,
+    createdAt,
+    member
+  } = req.body;
+
+  Chat.findOne({ squadId }).then((room) => {
+    if (room) {
+      const addMessage = {
+        _id,
+        type,
+        text,
+        member,
+        createdAt
+      }
+      room.messages.push({ addMessage });
+      room.save();
+      res.json({ posted: true })
+    }
+    if (!room) {
+      const newMessage = {
+        squadId,
+        messages: [{
+          _id,
+          type,
+          text,
+          member,
+          createdAt
+        }]
+
+      };
+
+      Chat.create(newMessage).then((room) => {
+        if (room) res.json({ posted: true })
+      }).catch((err) => {
+        res.status(500).json({ error: `Post not saved: ${err}`, posted: false })
+      })
+    }
+  }).catch((error) => {
+    res.status(500).json({ error: "No Squad found", posted: false })
+  })
+
+})
 
 module.exports = router;
