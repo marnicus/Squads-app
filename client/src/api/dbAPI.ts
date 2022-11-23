@@ -3,8 +3,6 @@ import {
   MemberResult,
   SquadMember,
   NewSquad,
-  Squads,
-  Message,
   Post,
 } from "../components/interfaces";
 import client from "./client";

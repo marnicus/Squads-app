@@ -1,11 +1,9 @@
-import TextField from "@mui/material/TextField";
 import { Fragment, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
 import InputEmoji from 'react-input-emoji';
 import { FormControl, Grid, IconButton } from "@mui/material";
 import SendOutlined from "@mui/icons-material/SendOutlined";
-import { postMessage } from "../../../../redux/squadRoomSlice";
 import { sendMessage } from "../../../../api/dbAPI";
 import { v4 as uuidv4 } from 'uuid';
 import { Post } from "../../../interfaces";
@@ -14,7 +12,6 @@ const MessageInput = () => {
   const [text, setText] = useState<string>("");
   const { squadMember } = useSelector((state: RootState) => state.authReducer);
   const { squadId } = useSelector((state: RootState) => state.squadRoomReducer);
-  const dispatch = useDispatch();
 
   const handlePost = async (text: string) => {
     const newMessage: Post = {

@@ -1,6 +1,6 @@
 import MessageInput from "./messages/MessageInput";
 import { useState, Fragment, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import Typography from "@mui/material/Typography";
 import { getChatData } from "../../../api/dbAPI";
@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import MyMessage from "./messages/MyMessageCard";
 
 const ChatRoom = () => {
-  const { loading, squadId, squadName } = useSelector(
+  const { squadId } = useSelector(
     (state: RootState) => state.squadRoomReducer
   );
   const { squadMember } = useSelector(
@@ -18,7 +18,6 @@ const ChatRoom = () => {
   );
   const [messages, setMessages] = useState<Message[]>([]);
   const [initFinished, setInitFinished] = useState<boolean>(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (squadId) {
